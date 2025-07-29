@@ -1,0 +1,4 @@
+repository "StickManGame4.0/StickManGame4.0@5772997475490@cloud"
+  path "/"
+    br "/main"
+    co "/main"
