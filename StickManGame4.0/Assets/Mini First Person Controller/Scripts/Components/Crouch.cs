@@ -6,7 +6,7 @@ public class Crouch : MonoBehaviour
 
     [Header("Slow Movement")]
     [Tooltip("Movement to slow down when crouched.")]
-    public FirstPersonMovement movement;
+    public FirstPersonMovement Movement;
     [Tooltip("Movement speed when crouched.")]
     public float movementSpeed = 2;
 
