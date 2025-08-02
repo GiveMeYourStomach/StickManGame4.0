@@ -26,8 +26,7 @@ SOFTWARE.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
-using Cinemachine.Utility;
+
 
 namespace Climbing
 {
@@ -45,8 +44,8 @@ namespace Climbing
 
         CameraType curCam = CameraType.None;
 
-        [SerializeField] private CinemachineFreeLook FreeLook;
-        [SerializeField] private CinemachineVirtualCamera Slide;
+        [SerializeField] private Camera FreeLook;
+        [SerializeField] private Camera Slide;
 
 
         void Start()
@@ -61,8 +60,8 @@ namespace Climbing
         {
             if (curCam != CameraType.Freelook)
             {
-                Slide.Priority = 0;
-                FreeLook.Priority = 1;
+                Slide.gameObject.SetActive(false);// Slide.Priority = 0;
+                FreeLook.gameObject.SetActive(true); // FreeLook.Priority = 1;
             }
         }
 
@@ -71,8 +70,8 @@ namespace Climbing
         {
             if (curCam != CameraType.Slide)
             {
-                FreeLook.Priority = 0;
-                Slide.Priority = 1;
+                FreeLook.gameObject.SetActive(false); // FreeLook.Priority = 0;
+                Slide.gameObject.SetActive(true); // Slide.Priority = 1;
             }
         }
     }

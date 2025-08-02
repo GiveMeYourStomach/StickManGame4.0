@@ -153,7 +153,7 @@ namespace Climbing
             {
                 //Applies Input Movement to the RigidBody
                 smoothSpeed = Mathf.Lerp(smoothSpeed, curSpeed, Time.fixedDeltaTime * 2);
-                rb.velocity = new Vector3(velocity.x * smoothSpeed, velocity.y * smoothSpeed + rb.velocity.y, velocity.z * smoothSpeed);
+                rb.linearVelocity = new Vector3(velocity.x * smoothSpeed, velocity.y * smoothSpeed + rb.linearVelocity.y, velocity.z * smoothSpeed);
 
                 //Detect Player on Irregular Surface and adjust movement to avoid slowing down and undesired jumps
                 RaycastHit hit;
@@ -161,8 +161,8 @@ namespace Climbing
                 if (hit.normal != Vector3.up)
                 {
                     controller.inSlope = true;
-                    rb.velocity += -new Vector3(hit.normal.x, 0, hit.normal.z) * 1.0f;
-                    rb.velocity = rb.velocity + Vector3.up * Physics.gravity.y * 1.6f * Time.fixedDeltaTime;
+                    rb.linearVelocity += -new Vector3(hit.normal.x, 0, hit.normal.z) * 1.0f;
+                    rb.linearVelocity = rb.linearVelocity + Vector3.up * Physics.gravity.y * 1.6f * Time.fixedDeltaTime;
                 }
                 else
                 {
@@ -173,20 +173,20 @@ namespace Climbing
                 AutoStep();
 
                 //Sets velocity for movement animations
-                controller.characterAnimation.SetAnimVelocity(rb.velocity);
+                controller.characterAnimation.SetAnimVelocity(rb.linearVelocity);
             }
             else
             {
                 //Lerp down with current velocity of the rigidbody when no input detected
                 smoothSpeed = Mathf.SmoothStep(smoothSpeed, 0, Time.fixedDeltaTime * 20);
-                rb.velocity = new Vector3(rb.velocity.normalized.x * smoothSpeed, rb.velocity.y, rb.velocity.normalized.z * smoothSpeed);
+                rb.linearVelocity = new Vector3(rb.linearVelocity.normalized.x * smoothSpeed, rb.linearVelocity.y, rb.linearVelocity.normalized.z * smoothSpeed);
                 controller.characterAnimation.SetAnimVelocity(controller.characterAnimation.GetAnimVelocity().normalized * smoothSpeed);
             }
 
             //Apply fall multiplier as gravity
-            if (rb.velocity.y <= 0)
+            if (rb.linearVelocity.y <= 0)
             {
-                rb.velocity += Vector3.up * Physics.gravity.y * (fallForce - 1) * Time.fixedDeltaTime;
+                rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallForce - 1) * Time.fixedDeltaTime;
             }
         }
 
@@ -276,7 +276,7 @@ namespace Climbing
         }
 
         public Vector3 GetVelocity() { 
-            return rb.velocity; 
+            return rb.linearVelocity; 
         }
 
         public void SetVelocity(Vector3 value)
@@ -332,7 +332,7 @@ namespace Climbing
 
         public void ApplyGravity()
         {
-            rb.velocity += Vector3.up * -0.300f;
+            rb.linearVelocity += Vector3.up * -0.300f;
         }
 
         public void Fall()
