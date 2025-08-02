@@ -14,7 +14,9 @@ public class FirstPersonLook : MonoBehaviour
     void Reset()
     {
         // Get the character from the FirstPersonMovement in parents.
-        character = GetComponentInParent<FirstPersonMovement>().transform;
+        var movement = GetComponentInParent<FirstPersonMovement>();
+        if (movement != null)
+            character = movement.transform;
     }
 
     void Start()
