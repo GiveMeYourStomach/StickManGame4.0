@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class GroundCheck : MonoBehaviour
+public class CustomGroundSensor : MonoBehaviour
 {
     [Header("Ground Detection Settings")]
     [SerializeField] private float checkRadius = 0.2f;
