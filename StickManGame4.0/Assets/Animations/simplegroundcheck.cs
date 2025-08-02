@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class GroundCheck : MonoBehaviour
+public class simplegroundcheck : MonoBehaviour
 {
     [Header("Ground Detection")]
     public LayerMask groundLayerMask = 1;

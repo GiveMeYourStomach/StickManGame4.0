@@ -5,9 +5,9 @@ public class GroundCheck : MonoBehaviour
 {
     [Tooltip("Maximum distance from the ground.")]
     public float distanceThreshold = .15f;
-
+    private const bool V = true;
     [Tooltip("Whether this transform is grounded now.")]
-    public bool isGrounded = true;
+    public bool isGrounded = V;
     /// <summary>
     /// Called when the ground is touched again.
     /// </summary>
@@ -31,7 +31,7 @@ public class GroundCheck : MonoBehaviour
         // Call event if we were in the air and we are now touching the ground.
         if (isGroundedNow && !isGrounded)
         {
-            Grounded?.Invoke();
+            object value = Grounded?.Invoke();
         }
 
         // Update isGrounded.
