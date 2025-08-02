@@ -31,7 +31,7 @@ public class GroundCheck : MonoBehaviour
         // Call event if we were in the air and we are now touching the ground.
         if (isGroundedNow && !isGrounded)
         {
-            object value = Grounded?.Invoke();
+            Grounded?.Invoke(); // ✅ Correct usage
         }
 
         // Update isGrounded.
